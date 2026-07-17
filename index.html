@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Busan Foreigner Safety Platform</title>
     <style>
-        /* 모바일 화면에서 위아래 여백을 0으로 만들어 사진이 꽉 차게 합니다 */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #0b1d3a; /* 이미지 배경과 똑같은 네이비 색상 */
+            background-color: #0b1d3a;
             overflow-x: hidden;
         }
         .container {
             width: 100%;
-            max-width: 600px; /* 모바일 크기에 딱 맞춤 */
+            max-width: 600px;
             margin: 0 auto;
             position: relative;
         }
@@ -24,40 +23,35 @@
             width: 100%;
             height: auto;
             display: block;
-            margin: 0;
-            padding: 0;
         }
-        /* 이미지 위를 손가락으로 누르는 투명 터치 영역 */
+        /* 이미지 위를 클릭하는 링크 영역 정의 */
         .touch-link {
             position: absolute;
             cursor: pointer;
-            background-color: rgba(255, 255, 255, 0); /* 투명하게 설정 */
+            background-color: rgba(255, 255, 255, 0); /* 투명 */
             border-radius: 12px;
+            display: block;
         }
 
-        /* [1. 언어 선택 버튼 터치 영역] */
-        /* English -> main_en.png로 연결 */
+        /* [언어 버튼 클릭 시 해당 html 주소로 이동하도록 설정] */
         .btn-en {
             top: 55.6%;
             left: 6.7%;
             width: 86.6%;
             height: 6.2%;
         }
-        /* 中文 -> main_cn.png로 연결 */
         .btn-cn {
             top: 62.4%;
             left: 6.7%;
             width: 86.6%;
             height: 6.2%;
         }
-        /* 日本語 -> main_jp.png로 연결 */
         .btn-jp {
             top: 69.2%;
             left: 6.7%;
             width: 86.6%;
             height: 6.2%;
         }
-        /* Tiếng Việt -> main_vn.png로 연결 */
         .btn-vn {
             top: 76.0%;
             left: 6.7%;
@@ -65,7 +59,7 @@
             height: 6.2%;
         }
 
-        /* [2. 긴급전화 터치 영역 (하단)] */
+        /* [긴급전화 연결 영역] */
         .phone-link {
             position: absolute;
             cursor: pointer;
@@ -73,17 +67,14 @@
             height: 10.5%;
             top: 81.5%;
         }
-        /* 112 경찰 전화연결 */
         .call-112 {
             left: 6.7%;
             width: 27.5%;
         }
-        /* 119 소방 전화연결 */
         .call-119 {
             left: 36.2%;
             width: 27.5%;
         }
-        /* 1330 관광안내 전화연결 */
         .call-1330 {
             left: 65.8%;
             width: 27.5%;
@@ -93,29 +84,17 @@
 <body>
 
     <div class="container">
-        <img id="display-image" src="home.png" alt="Busan Foreigner Safety Platform">
+        <img src="home.png" alt="Busan Foreigner Safety Platform">
 
-        <div class="touch-link btn-en" onclick="changeImage('main_en.png')" title="English"></div>
-        <div class="touch-link btn-cn" onclick="changeImage('main_cn.png')" title="中文"></div>
-        <div class="touch-link btn-jp" onclick="changeImage('main_jp.png')" title="日本語"></div>
-        <div class="touch-link btn-vn" onclick="changeImage('main_vn.png')" title="Tiếng Việt"></div>
+        <a href="en.html" class="touch-link btn-en" title="English"></a>
+        <a href="cn.html" class="touch-link btn-cn" title="中文"></a>
+        <a href="jp.html" class="touch-link btn-jp" title="日本語"></a>
+        <a href="vn.html" class="touch-link btn-vn" title="Tiếng Việt"></a>
 
         <a href="tel:112" class="phone-link call-112" title="Call 112"></a>
         <a href="tel:119" class="phone-link call-119" title="Call 119"></a>
         <a href="tel:1330" class="phone-link call-1330" title="Call 1330"></a>
     </div>
-
-    <script>
-        // 버튼을 누르는 순간 이미지를 바꾸고 부드럽게 맨 위로 올리는 자바스크립트 함수
-        function changeImage(imageName) {
-            var imgTag = document.getElementById('display-image');
-            if (imgTag) {
-                imgTag.src = imageName;
-                // 스크롤을 맨 위로 매끄럽게 정렬하여 큰 이미지의 윗부분부터 볼 수 있게 합니다.
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-    </script>
 
 </body>
 </html>
