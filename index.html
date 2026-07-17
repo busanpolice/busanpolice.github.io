@@ -10,7 +10,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #0b1d3a;
+            background-color: #0b1d3a; /* 이미지 배경색과 일치 */
             overflow-x: hidden;
         }
         .container {
@@ -24,77 +24,93 @@
             height: auto;
             display: block;
         }
-        /* 이미지 위를 클릭하는 링크 영역 정의 */
+        /* 이미지 위를 클릭하는 투명 터치막 공통 스타일 */
         .touch-link {
             position: absolute;
             cursor: pointer;
-            background-color: rgba(255, 255, 255, 0); /* 투명 */
-            border-radius: 12px;
-            display: block;
+            background-color: rgba(255, 255, 255, 0); /* 완전 투명 */
         }
 
-        /* [언어 버튼 클릭 시 해당 html 주소로 이동하도록 설정] */
-        .btn-en {
-            top: 55.6%;
-            left: 6.7%;
-            width: 86.6%;
-            height: 6.2%;
-        }
-        .btn-cn {
-            top: 62.4%;
-            left: 6.7%;
-            width: 86.6%;
-            height: 6.2%;
-        }
-        .btn-jp {
-            top: 69.2%;
-            left: 6.7%;
-            width: 86.6%;
-            height: 6.2%;
-        }
-        .btn-vn {
-            top: 76.0%;
-            left: 6.7%;
-            width: 86.6%;
-            height: 6.2%;
+        /* [1. 대표이미지(home.png) 상태일 때의 언어 버튼 위치] */
+        .btn-en { top: 55.6%; left: 6.7%; width: 86.6%; height: 6.2%; border-radius: 12px; }
+        .btn-cn { top: 62.4%; left: 6.7%; width: 86.6%; height: 6.2%; border-radius: 12px; }
+        .btn-jp { top: 69.2%; left: 6.7%; width: 86.6%; height: 6.2%; border-radius: 12px; }
+        .btn-vn { top: 76.0%; left: 6.7%; width: 86.6%; height: 6.2%; border-radius: 12px; }
+
+        /* [2. 모든 페이지 공통: 제일 상단 언어선택(简体中文 ∨) 클릭 영역] */
+        .btn-top-lang {
+            top: 1.5%;
+            left: 2.0%;
+            width: 25.0%;
+            height: 3.5%;
         }
 
-        /* [긴급전화 연결 영역] */
-        .phone-link {
-            position: absolute;
-            cursor: pointer;
-            background-color: rgba(255, 255, 255, 0); 
+        /* [3. 긴급전화 터치 영역 - home.png 와 main_cn.png 공통 지원] */
+        .call-112 { top: 30.5%; left: 2.5%; width: 30.0%; height: 13.5%; }
+        .call-119 { top: 30.5%; left: 35.0%; width: 30.0%; height: 13.5%; }
+        .call-1330 { top: 30.5%; left: 67.5%; width: 30.0%; height: 13.5%; }
+
+        /* [4. 홈(대표이미지) 전용 하단 긴급전화 영역 (home.png 맨밑에 배치된 전화 대응)] */
+        .home-phone {
             height: 10.5%;
             top: 81.5%;
         }
-        .call-112 {
-            left: 6.7%;
-            width: 27.5%;
-        }
-        .call-119 {
-            left: 36.2%;
-            width: 27.5%;
-        }
-        .call-1330 {
-            left: 65.8%;
-            width: 27.5%;
-        }
+        .home-112 { left: 6.7%; width: 27.5%; }
+        .home-119 { left: 36.2%; width: 27.5%; }
+        .home-1330 { left: 65.8%; width: 27.5%; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="home.png" alt="Busan Foreigner Safety Platform">
+        <!-- 메인 화면 이미지 (브라우저가 이미지를 강제로 새로고침하도록 타임스탬프 기능을 자바스크립트로 넣었습니다) -->
+        <img id="display-image" src="home.png" alt="Busan Foreigner Safety Platform">
 
-        <a href="en.html" class="touch-link btn-en" title="English"></a>
-        <a href="cn.html" class="touch-link btn-cn" title="中文"></a>
-        <a href="jp.html" class="touch-link btn-jp" title="日本語"></a>
-        <a href="vn.html" class="touch-link btn-vn" title="Tiếng Việt"></a>
+        <!-- [첫 화면(home.png)에서 국적별 버튼 누르는 영역] -->
+        <div id="area-en" class="touch-link btn-en" onclick="changeImage('main_en.png')" title="English"></div>
+        <div id="area-cn" class="touch-link btn-cn" onclick="changeImage('main_cn.png')" title="中文"></div>
+        <div id="area-jp" class="touch-link btn-jp" onclick="changeImage('main_jp.png')" title="日本語"></div>
+        <div id="area-vn" class="touch-link btn-vn" onclick="changeImage('main_vn.png')" title="Tiếng Việt"></div>
 
-        <a href="tel:112" class="phone-link call-112" title="Call 112"></a>
-        <a href="tel:119" class="phone-link call-119" title="Call 119"></a>
-        <a href="tel:1330" class="phone-link call-1330" title="Call 1330"></a>
+        <!-- [모든 화면 공통: 제일 상단 '언어 선택 영역' 누르면 첫 화면(대표이미지)으로 복귀] -->
+        <div class="touch-link btn-top-lang" onclick="changeImage('home.png')" title="Change Language"></div>
+
+        <!-- [중간에 배치된 신형 긴급전화 버튼 영역 - main_cn.png 등의 큰 컬러 버튼 대응] -->
+        <a href="tel:112" class="touch-link call-112" title="Call 112"></a>
+        <a href="tel:119" class="touch-link call-119" title="Call 119"></a>
+        <a href="tel:1330" class="touch-link call-1330" title="Call 1330"></a>
+
+        <!-- [첫 화면(home.png) 전용 맨 아래 긴급전화 영역] -->
+        <a id="h-112" href="tel:112" class="touch-link home-phone home-112" title="Call 112"></a>
+        <a id="h-119" href="tel:119" class="touch-link home-phone home-119" title="Call 119"></a>
+        <a id="h-1330" href="tel:1330" class="touch-link home-phone home-1330" title="Call 1330"></a>
     </div>
+
+    <script>
+        function changeImage(imageName) {
+            var imgTag = document.getElementById('display-image');
+            if (imgTag) {
+                // [물음표 완벽 차단 기술] 이미지 주소 뒤에 랜덤 번호를 붙여 브라우저가 무조건 이미지를 새로 그리게 강제합니다.
+                imgTag.src = imageName + "?t=" + new Date().getTime();
+                
+                // 화면을 맨 위로 부드럽게 올려줍니다.
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // 첫 화면이 아닐 때는 첫 화면용 버튼들을 숨겨서 터치가 꼬이지 않게 보호합니다.
+                var isHome = (imageName === 'home.png');
+                var displayVal = isHome ? 'block' : 'none';
+                
+                document.getElementById('area-en').style.display = displayVal;
+                document.getElementById('area-cn').style.display = displayVal;
+                document.getElementById('area-jp').style.display = displayVal;
+                document.getElementById('area-vn').style.display = displayVal;
+                document.getElementById('h-112').style.display = displayVal;
+                document.getElementById('h-119').style.display = displayVal;
+                document.getElementById('h-1330').style.display = displayVal;
+            }
+        }
+    </script>
 
 </body>
 </html>
+
