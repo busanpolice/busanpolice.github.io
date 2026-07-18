@@ -35,8 +35,6 @@
             cursor: pointer;
             background-color: rgba(255, 255, 255, 0);
             z-index: 10;
-            /* 💡 위치를 눈으로 확인하고 싶다면 아래 주석(#)을 제거하세요 */
-            /* background-color: rgba(255, 0, 0, 0.4); */
         }
 
         /* [최우선 레이어] 상단바 및 전화 버튼은 맨 위층으로 고정 */
@@ -131,13 +129,13 @@
         <img id="img-sub-rules" class="main-img" src="basicrules.png" alt="Basic Rules">
         <img id="img-sub-embassy" class="main-img" src="embassy.png" alt="Embassies">
 
-        <!-- 병원 메인 이미지들 (sub-hospital-xx) -->
+        <!-- 병원 메인 이미지들 -->
         <img id="img-sub-hospital-en" class="main-img" src="hospital_en.png" alt="Hospital EN">
         <img id="img-sub-hospital-cn" class="main-img" src="hospital_cn.png" alt="Hospital CN">
         <img id="img-sub-hospital-jp" class="main-img" src="hospital_jp.png" alt="Hospital JP">
         <img id="img-sub-hospital-vn" class="main-img" src="hospital_vn.png" alt="Hospital VN">
 
-        <!-- 병원 하부: 메디컬 정보 상세 이미지들 (medical-info-xx) -->
+        <!-- 병원 하부: 메디컬 정보 상세 이미지들 -->
         <img id="img-medical-info-en" class="main-img" src="medical-info-en.png" alt="Medical Info EN">
         <img id="img-medical-info-cn" class="main-img" src="medical-info-cn.png" alt="Medical Info CN">
         <img id="img-medical-info-jp" class="main-img" src="medical-info-jp.png" alt="Medical Info JP">
@@ -167,12 +165,13 @@
 
         <div id="area-lang-dropdown" class="touch-link btn-lang-dropdown layer-top-priority" onclick="toggleDropdown(event)" style="display: none;"></div>
 
+        <!-- 🌟 드롭다운 메뉴 내 링크 클릭 시 갱신 이벤트를 명확히 바인딩 하도록 수정 -->
         <div id="langDropdown" class="dropdown-menu">
-            <a href="#" onclick="changeLanguageDirect('home')">🏠 메인 (Home)</a>
-            <a href="#" onclick="changeLanguageDirect('en')">🇺🇸 English</a>
-            <a href="#" onclick="changeLanguageDirect('cn')">🇨🇳 中文 (简体)</a>
-            <a href="#" onclick="changeLanguageDirect('jp')">🇯🇵 日本語</a>
-            <a href="#" onclick="changeLanguageDirect('vn')">🇻🇳 Tiếng Việt</a>
+            <a href="#" onclick="changeLanguageDirect(event, 'home')">🏠 메인 (Home)</a>
+            <a href="#" onclick="changeLanguageDirect(event, 'en')">🇺🇸 English</a>
+            <a href="#" onclick="changeLanguageDirect(event, 'cn')">🇨🇳 中文 (简体)</a>
+            <a href="#" onclick="changeLanguageDirect(event, 'jp')">🇯🇵 日本語</a>
+            <a href="#" onclick="changeLanguageDirect(event, 'vn')">🇻🇳 Tiếng Việt</a>
         </div>
 
         <a id="c-112" href="tel:112" class="touch-link call-112 layer-top-priority" style="display: none;"></a>
@@ -187,7 +186,7 @@
         
         <div id="click-rule" class="touch-link click-rules" onclick="showPage('sub-rules')" style="display: none;"></div>
         
-        <!-- 🌟 [수정 완료] 부산 투어리스트 스팟을 구글맵 검색결과 새 창 링크로 변경 -->
+        <!-- 부산 투어리스트 스팟 구글맵 링크 -->
         <a id="click-spot" href="https://www.google.com/maps/search/Busan+tourist+map/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw==" target="_blank" class="touch-link click-spots" style="display: none;"></a>
 
         <!-- 병원 이미지 내부 링크 영역들 -->
@@ -312,7 +311,9 @@
             }
         }
 
-        function changeLanguageDirect(langCode) {
+        // 🌟 [핵심 교정] 드롭다운에서 언어 다이렉트 클릭 시 히스토리 및 강제 전환 타겟을 온전히 추적하도록 리팩토링
+        function changeLanguageDirect(event, langCode) {
+            if (event) event.preventDefault(); // href="#"로 인해 최상단 주소가 오작동하는 기본 이벤트 방지
             document.getElementById('langDropdown').style.display = 'none';
             showPage(langCode);
         }
