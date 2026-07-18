@@ -19,13 +19,12 @@
             margin: 0 auto;
             position: relative;
         }
-        /* 모든 메인 안내 이미지는 기본적으로 숨겨둡니다 */
+        /* 소문자 이미지들을 처음에 미리 로드하여 물음표 에러를 차단합니다 */
         .main-img {
             width: 100%;
             height: auto;
             display: none;
         }
-        /* 현재 선택된 이미지만 화면에 보여줍니다 */
         .main-img.active {
             display: block;
         }
@@ -36,21 +35,21 @@
             background-color: rgba(255, 255, 255, 0);
         }
 
-        /* 1. 홈 화면 버튼 위치 */
+        /* 1. 첫 메인화면(home.png) 내 국가별 버튼 위치 */
         .btn-en { top: 55.6%; left: 6.7%; width: 86.6%; height: 6.2%; border-radius: 12px; }
         .btn-cn { top: 62.4%; left: 6.7%; width: 86.6%; height: 6.2%; border-radius: 12px; }
         .btn-jp { top: 69.2%; left: 6.7%; width: 86.6%; height: 6.2%; border-radius: 12px; }
         .btn-vn { top: 76.0%; left: 6.7%; width: 86.6%; height: 6.2%; border-radius: 12px; }
 
-        /* 2. 상단 언어메뉴 클릭 영역 (첫 화면으로 복귀) */
+        /* 2. 번역 가이드 화면 제일 상단 (첫 화면으로 돌아가는 버튼) */
         .btn-top-lang { top: 0.5%; left: 2.0%; width: 28.0%; height: 4.5%; }
 
-        /* 3. 중간 큰 전화 버튼 영역 */
+        /* 3. 번역 가이드 화면 내의 큰 전화 버튼 3개 */
         .call-112 { top: 29.5%; left: 2.5%; width: 30.0%; height: 14.5%; }
         .call-119 { top: 29.5%; left: 35.0%; width: 30.0%; height: 14.5%; }
         .call-1330 { top: 29.5%; left: 67.5%; width: 30.0%; height: 14.5%; }
 
-        /* 4. 홈 화면 맨 아래 전화 영역 */
+        /* 4. 첫 메인화면 최하단 전화걸기 영역 */
         .home-phone { height: 10.5%; top: 81.5%; }
         .home-112 { left: 6.7%; width: 27.5%; }
         .home-119 { left: 36.2%; width: 27.5%; }
@@ -60,28 +59,28 @@
 <body>
 
     <div class="container">
-        <!-- [모든 이미지를 처음부터 정적으로 로드해 둡니다 - 물음표 방지] -->
+        <!-- 바뀐 소문자 .png 파일명과 100% 일치하도록 연동했습니다 -->
         <img id="img-home" class="main-img active" src="home.png" alt="Home">
-        <img id="img-en" class="main-img" src="images/main_en.png" alt="English">
+        <img id="img-en" class="main-img" src="main_en.png" alt="English">
         <img id="img-cn" class="main-img" src="main_cn.png" alt="Chinese">
         <img id="img-jp" class="main-img" src="main_jp.png" alt="Japanese">
         <img id="img-vn" class="main-img" src="main_vn.png" alt="Vietnamese">
 
-        <!-- [첫 화면 버튼 영역] -->
+        <!-- [첫 화면 국가/언어 선택용 터치 영역] -->
         <div id="area-en" class="touch-link btn-en" onclick="showPage('en')"></div>
         <div id="area-cn" class="touch-link btn-cn" onclick="showPage('cn')"></div>
         <div id="area-jp" class="touch-link btn-jp" onclick="showPage('jp')"></div>
         <div id="area-vn" class="touch-link btn-vn" onclick="showPage('vn')"></div>
 
-        <!-- [상단 언어 메뉴 누르면 홈 복귀] -->
+        <!-- [상단 언어 메뉴 클릭 시 첫 화면 복귀용 터치 영역] -->
         <div id="area-top-lang" class="touch-link btn-top-lang" onclick="showPage('home')" style="display: none;"></div>
 
-        <!-- [중간 긴급전화 버튼 영역] -->
+        <!-- [가이드 화면 중간 전화걸기 터치 영역] -->
         <a id="c-112" href="tel:112" class="touch-link call-112" style="display: none;"></a>
         <a id="c-119" href="tel:119" class="touch-link call-119" style="display: none;"></a>
         <a id="c-1330" href="tel:1330" class="touch-link call-1330" style="display: none;"></a>
 
-        <!-- [첫 화면 맨 아래 긴급전화 영역] -->
+        <!-- [첫 메인화면 하단 전화걸기 터치 영역] -->
         <a id="h-112" href="tel:112" class="touch-link home-phone home-112"></a>
         <a id="h-119" href="tel:119" class="touch-link home-phone home-119"></a>
         <a id="h-1330" href="tel:1330" class="touch-link home-phone home-1330"></a>
@@ -89,19 +88,19 @@
 
     <script>
         function showPage(lang) {
-            // 1. 모든 이미지를 일단 화면에서 숨깁니다.
+            // 1. 화면에 켜져 있는 기존 이미지를 전부 숨깁니다.
             var images = document.getElementsByClassName('main-img');
             for (var i = 0; i < images.length; i++) {
                 images[i].classList.remove('active');
             }
 
-            // 2. 선택한 언어의 이미지만 켜줍니다.
+            // 2. 누른 나라의 소문자(.png) 이미지만 화면에 활성화합니다.
             document.getElementById('img-' + lang).classList.add('active');
             
-            // 3. 화면을 맨 위로 스크롤합니다.
+            // 3. 페이지 상단으로 부드럽게 화면을 올려줍니다.
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // 4. 홈화면일 때와 번역화면일 때 터치 버튼 영역을 전환합니다.
+            // 4. 화면 전환에 맞춰 터치 버튼 레이어를 정교하게 껐다 켭니다.
             var isHome = (lang === 'home');
             
             document.getElementById('area-en').style.display = isHome ? 'block' : 'none';
@@ -121,4 +120,3 @@
 
 </body>
 </html>
-
