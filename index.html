@@ -35,8 +35,6 @@
             cursor: pointer;
             background-color: rgba(255, 255, 255, 0);
             z-index: 10;
-            /* 💡 위치가 잘 맞는지 눈으로 테스트하고 싶다면 아래 주석(//)을 제거하세요 */
-            /* background-color: rgba(255, 0, 0, 0.4); */
         }
 
         /* [최우선 레이어] 상단바 및 전화 버튼은 맨 위층으로 고정 */
@@ -65,7 +63,7 @@
         /* [상단 내비게이션 터치 영역 (지구본)] */
         .btn-lang-dropdown { top: 0.5%; left: 2.0%; width: 25.0%; height: 4.5%; } 
 
-        /* 🌟 [상단 큰 전화 버튼 3개] 세로 범위 조정하여 아래 칸들과 절대로 안 겹치게 고정 */
+        /* [상단 큰 전화 버튼 3개] */
         .call-112 { top: 29.5%; left: 2.5%; width: 30.0%; height: 13.0%; z-index: 90; }
         .call-119 { top: 29.5%; left: 35.0%; width: 30.0%; height: 13.0%; z-index: 90; }
         .call-1330 { top: 29.5%; left: 67.5%; width: 30.0%; height: 13.0%; z-index: 90; }
@@ -78,7 +76,7 @@
         .click-rules     { top: 78.0%; left: 2.5%; width: 46.5%; height: 14.0%; }
         .click-spots     { top: 78.0%; left: 51.0%; width: 46.5%; height: 14.0%; }
 
-        /* 🌟 [병원/약국 화면 내부] 상단 112/119 버튼(top 29.5% ~ height 13% = 42.5% 지점 종료) 아래인 44.5%부터 안전하게 시작하도록 설정 */
+        /* [병원/약국 화면 내부 터치 영역] */
         .click-medical-info { top: 44.5%; left: 4.0%; width: 45.0%; height: 13.0%; z-index: 80; }
         .click-find-hospital { top: 44.5%; left: 51.0%; width: 45.0%; height: 13.0%; z-index: 80; }
 
@@ -131,16 +129,19 @@
         <img id="img-sub-rules" class="main-img" src="basicrules.png" alt="Basic Rules">
         <img id="img-sub-embassy" class="main-img" src="embassy.png" alt="Embassies">
 
+        <!-- 병원 메인 이미지들 -->
         <img id="img-sub-hospital-en" class="main-img" src="hospital_en.png" alt="Hospital EN">
         <img id="img-sub-hospital-cn" class="main-img" src="hospital_cn.png" alt="Hospital CN">
         <img id="img-sub-hospital-jp" class="main-img" src="hospital_jp.png" alt="Hospital JP">
         <img id="img-sub-hospital-vn" class="main-img" src="hospital_vn.png" alt="Hospital VN">
 
+        <!-- 병원 하부: 메디컬 정보 상세 이미지들 -->
         <img id="img-medical-info-en" class="main-img" src="medical-info-en.png" alt="Medical Info EN">
         <img id="img-medical-info-cn" class="main-img" src="medical-info-cn.png" alt="Medical Info CN">
         <img id="img-medical-info-jp" class="main-img" src="medical-info-jp.png" alt="Medical Info JP">
         <img id="img-medical-info-vn" class="main-img" src="medical-info-vn.png" alt="Medical Info VN">
 
+        <!-- 약국 메인 이미지들 -->
         <img id="img-sub-pharmacy-en" class="main-img" src="pharmacy_en.png" alt="Pharmacy EN">
         <img id="img-sub-pharmacy-cn" class="main-img" src="pharmacy_cn.png" alt="Pharmacy CN">
         <img id="img-sub-pharmacy-jp" class="main-img" src="pharmacy_jp.png" alt="Pharmacy JP">
@@ -152,10 +153,12 @@
         <div id="area-jp" class="touch-link btn-jp" onclick="showPage('jp')"></div>
         <div id="area-vn" class="touch-link btn-vn" onclick="showPage('vn')"></div>
 
+        <!-- 홈 화면(home.png) 전용 하단 전화걸기 링크 영역 -->
         <a id="h-112" href="tel:112" class="touch-link home-phone home-112" style="display: none;"></a>
         <a id="h-119" href="tel:119" class="touch-link home-phone home-119" style="display: none;"></a>
         <a id="h-1330" href="tel:1330" class="touch-link home-phone home-1330" style="display: none;"></a>
 
+        <!-- 기초질서 페이지(basicrules.png) 전용 하단 칸맞춤 전화걸기 링크 영역 -->
         <a id="r-112" href="tel:112" class="touch-link rules-phone rules-112" style="display: none;"></a>
         <a id="r-119" href="tel:119" class="touch-link rules-phone rules-119" style="display: none;"></a>
         <a id="r-1330" href="tel:1330" class="touch-link rules-phone rules-1330" style="display: none;"></a>
@@ -170,6 +173,7 @@
             <a href="#" onclick="changeLanguageDirect(event, 'vn')">🇻🇳 Tiếng Việt</a>
         </div>
 
+        <!-- 상단 고정 긴급 전화 버튼 레이어 -->
         <a id="c-112" href="tel:112" class="touch-link call-112" style="display: none;"></a>
         <a id="c-119" href="tel:119" class="touch-link call-119" style="display: none;"></a>
         <a id="c-1330" href="tel:1330" class="touch-link call-1330" style="display: none;"></a>
@@ -182,12 +186,15 @@
         
         <div id="click-rule" class="touch-link click-rules" onclick="showPage('sub-rules')" style="display: none;"></div>
         
+        <!-- 부산 투어리스트 스팟 구글맵 링크 -->
         <a id="click-spot" href="https://www.google.com/maps/search/Busan+tourist+map/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw==" target="_blank" class="touch-link click-spots" style="display: none;"></a>
 
+        <!-- 병원 이미지 내부 링크 영역들 -->
         <div id="click-med-info" class="touch-link click-medical-info" onclick="showMedicalInfoPage()" style="display: none;"></div>
         <a id="click-find-hosp" href="https://www.medicalkorea.or.kr/en/mostvisitedmedicalinstitutions" target="_blank" class="touch-link click-find-hospital" style="display: none;"></a>
         <a id="go-ext-hospital" href="https://www.busan.go.kr/eng/bsmedical01" target="_blank" class="touch-link hospital-ext-link" style="display: none;"></a>
 
+        <!-- 약국 이미지 내부 링크 영역 -->
         <a id="click-24h-phar" href="https://www.busan.go.kr/eng/bsmedical06" target="_blank" class="touch-link click-24h-pharmacy" style="display: none;"></a>
     </div>
 
@@ -245,13 +252,12 @@
             // 2. 상단 지구본 내비바 제어
             document.getElementById('area-lang-dropdown').style.display = !isHome ? 'block' : 'none';
 
-            // 3. 상단/중단 고정 긴급 전화 버튼 제어 (병원 상세, 약국 상세, 메디컬 정보 화면 분기)
+            // 3. 상단/중단 고정 긴급 전화 버튼 제어
             if (isHome) {
                 document.getElementById('c-112').style.display = 'none';
                 document.getElementById('c-119').style.display = 'none';
                 document.getElementById('c-1330').style.display = 'none';
             } else if (isHospitalSub || isPharmacySub || isMedicalInfoSub) {
-                // 🌟 병원, 약국 내부에서는 112, 119만 켜고 1330은 끕니다.
                 document.getElementById('c-112').style.display = 'block';
                 document.getElementById('c-119').style.display = 'block';
                 document.getElementById('c-1330').style.display = 'none'; 
@@ -261,13 +267,14 @@
                 document.getElementById('c-1330').style.display = 'block';
             }
             
-            // 4. 국가별 메인 메뉴 제어
-            document.getElementById('click-hosp').style.display = isMainLang ? 'block' : 'none';
-            document.getElementById('click-phar').style.display = isMainLang ? 'block' : 'none';
-            document.getElementById('click-emba').style.display = isMainLang ? 'block' : 'none';
-            document.getElementById('click-lost').style.display = isMainLang ? 'block' : 'none';
-            document.getElementById('click-rule').style.display = isMainLang ? 'block' : 'none';
-            document.getElementById('click-spot').style.display = isMainLang ? 'block' : 'none';
+            // 4. 🌟[충돌 완벽 교정] 국가별 메인 메뉴 제어 (오직 메인 언어 페이지에서만 켜지도록 조건식 한 번 더 제한)
+            var showMainMenu = isMainLang && !isHospitalSub && !isPharmacySub && !isMedicalInfoSub;
+            document.getElementById('click-hosp').style.display = showMainMenu ? 'block' : 'none';
+            document.getElementById('click-phar').style.display = showMainMenu ? 'block' : 'none';
+            document.getElementById('click-emba').style.display = showMainMenu ? 'block' : 'none';
+            document.getElementById('click-lost').style.display = showMainMenu ? 'block' : 'none';
+            document.getElementById('click-rule').style.display = showMainMenu ? 'block' : 'none';
+            document.getElementById('click-spot').style.display = showMainMenu ? 'block' : 'none';
 
             // 5. 병원 안내 내부 터치 제어
             document.getElementById('click-med-info').style.display = isHospitalSub ? 'block' : 'none';
